@@ -105,7 +105,7 @@ public:
     void open(){
         HTTPSocket::open();
 
-        ctx(SSL_CTX_new(meth));
+        ctx = SSL_CTX_new(meth);
 
         if(!ctx)
             throw runtime_error("Error creating SLL context");
