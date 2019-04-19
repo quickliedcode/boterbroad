@@ -7,6 +7,7 @@ int main(){
     while(1){
 
         json answer = gb.getUpdates();
+        cout << answer["result"] << endl;
         gb.refresh();
 
     }
