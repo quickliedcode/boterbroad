@@ -13,3 +13,4 @@ HTTPResponse TelegramBot::method(string method, string args = ""){
     q.append(" HTTP/1.1\r\nHOST:api.telegram.org\r\nConnection: Keep-Alive\r\n\r\n");
     return httpsSocket.query(q);
 }
+
