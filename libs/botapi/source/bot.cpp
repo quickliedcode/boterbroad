@@ -1,6 +1,6 @@
 #include <bot.h>
 
-TelegramBot::TelegramBot(string tok) : httpsSocket("api.telegram.org"), token(tok){
+TelegramBot::TelegramBot(string tok) : httpsSocket("api.telegram.org"), token(tok), offset(0){
     json result = method("/getUpdates", "").toJSON();
     if(result["ok"] == false)
         throw runtime_error("Invalid bot token");

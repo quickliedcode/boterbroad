@@ -166,12 +166,18 @@ class TelegramBot{
     HTTPSSocket httpsSocket;
     string token;
     map<string, string> qa;
+    int offset;
 public:
     TelegramBot(string tok);
     HTTPResponse method(const string& method, const string& args);
     void refresh(){
         httpsSocket.close();
         httpsSocket.open();
+    }
+    json getUpdates(){
+        string arg = "?timeout=60&limit=3&offset=";
+        arg.append(to_string(offset));
+        return gb.method("/getUpdates", arg).toJSON;
     }
     void regAnswer(string msg, string answer){
         qa.insert({msg, answer});
