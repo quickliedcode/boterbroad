@@ -7,7 +7,8 @@ int main(){
     HTTPResponse response;
     string arg = "?timeout=60&limit=3&offset=0";
     string offset;
-    while(response = gb.method("/getUpdates", arg)){
+    while(1){
+        response = gb.method("/getUpdates", arg)
         cout << response.getText();
     }
     gb.refresh();
