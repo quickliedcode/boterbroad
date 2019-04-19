@@ -107,7 +107,7 @@ public:
         ctx = SSL_CTX_new(meth);
 
         if(!ctx){
-            cout << ERR_get_error() << endl;
+            cout << ERR_get_error()  << endl;
             throw runtime_error("Error creating SLL context");
         }
 
