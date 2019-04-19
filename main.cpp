@@ -7,6 +7,7 @@ int main(){
     while(1){
 
         json answer = gbot.getUpdates();
+        gbot.regAnswer("/start", "text");
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer))
                 gbot.sendMessage(answer["result"][0]["message"]["chat"]["id"], "привет");

@@ -180,7 +180,7 @@ public:
     bool sendKnownPhrase(const json& response){
         if(!qa.count(response["result"][0]["message"]["text"]))
             return false;
-        method("/sendMessage", response["result"][0]["message"]["chat"]["id"]);
+        sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
         return true;
     }
     json getUpdates(){
