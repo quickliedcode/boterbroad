@@ -3,5 +3,6 @@
 #define api_token "805012211:AAH8Z7IYj2FAu_lzUcYD5lStdJl9gN4aP7c"
 
 int main(){
-    TelegramBot b(api_token);
+    TelegramBot gb(api_token);
+    gb.refresh();
 }
