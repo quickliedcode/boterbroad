@@ -100,13 +100,15 @@ class HTTPSSocket : public HTTPSocket{
     SSL* sslSocket;
 
 public:
-    HTTPSSocket(const char* domain, int port = 443) : HTTPSocket(domain, port), ctx(SSL_CTX_new(meth)){
-        if(!ctx)
-            throw runtime_error("Error creating SLL context");
-    }
+    HTTPSSocket(const char* domain, int port = 443) : HTTPSocket(domain, port){}
 
     void open(){
         HTTPSocket::open();
+
+        ctx(SSL_CTX_new(meth);
+        if(!ctx)
+            throw runtime_error("Error creating SLL context");
+
         sslSocket = SSL_new(ctx);
         if(!sslSocket)
             throw runtime_error("Error creating SSL socket");
