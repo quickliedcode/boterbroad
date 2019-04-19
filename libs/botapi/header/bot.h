@@ -174,7 +174,7 @@ public:
         httpsSocket.open();
     }
     void regAnswer(string msg, string answer){
-        qa.insert(msg, answer);
+        qa.insert({msg, answer});
     }
     void unregAnswer(string msg, string answer){
         qa.erase(msg);
