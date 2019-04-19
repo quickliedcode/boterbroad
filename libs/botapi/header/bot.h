@@ -109,7 +109,7 @@ public:
         cout << "4\n";
 
         if(opened)
-            open();
+            HTTPSocket::open();
 
         SSLCONTEXT::init();
         ctx = SSL_CTX_new(meth);
