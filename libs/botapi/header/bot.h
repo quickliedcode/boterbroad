@@ -177,6 +177,10 @@ public:
     void sendMessage(int chat_id, string text){
         method("/sendMessage", "?text=" + text + "&chat_id=" + to_string(chat_id));
     }
+    bool containKnownPhrase(json response){
+
+
+    }
     json getUpdates(){
         string arg = "?timeout=60&limit=3&offset=";
         arg.append(to_string(offset));
@@ -184,8 +188,7 @@ public:
         json response = method("/getUpdates", arg).toJSON();
         offset = response["result"][0]["update_id"];
         offset++;
-        if(qa.count("response"))
-            return response;
+        return response;
 
     }
     void regAnswer(string msg, string answer){
