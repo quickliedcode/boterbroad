@@ -177,7 +177,9 @@ public:
     json getUpdates(){
         string arg = "?timeout=60&limit=3&offset=";
         arg.append(to_string(offset));
-        return method("/getUpdates", arg).toJSON();
+        json response = method("/getUpdates", arg).toJSON();
+        offset = response["result"][0]["update_id"];
+        return response;
     }
     void regAnswer(string msg, string answer){
         qa.insert({msg, answer});
