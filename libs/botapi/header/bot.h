@@ -180,7 +180,7 @@ public:
         arg.append(to_string(offset));
         cout << endl << "arg: " << arg << endl;
         json response = method("/getUpdates", arg).toJSON();
-        offset = response["result"][0]["update_id"] + 1;
+        offset = (response["result"][0]["update_id"]) + 1;
 
         return response;
 
