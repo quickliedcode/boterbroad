@@ -73,8 +73,6 @@ public:
         sin.sin_family = AF_INET;
         sin.sin_port = htons(port);
         memcpy(&sin.sin_addr.s_addr, h->h_addr, sizeof(int));
-
-        open();
     }
     virtual ~HTTPSocket(){
         close();
@@ -98,7 +96,6 @@ public:
 class HTTPSSocket : public HTTPSocket{
     SSL_CTX* ctx;
     SSL* sslSocket;
-
 public:
     HTTPSSocket(const char* domain, int port = 443) : HTTPSocket(domain, port){
         open();
