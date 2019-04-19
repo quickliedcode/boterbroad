@@ -98,42 +98,34 @@ class HTTPSSocket : public HTTPSocket{
 
 public:
     HTTPSSocket(const char* domain, int port = 443) : HTTPSocket(domain, port), ctx(SSL_CTX_new(meth)){
-        if(!ctx){
-		cout << ERR_get_error() << endl;
+        if(!ctx)
 		 throw runtime_error("Error creating SLL context");
-		cout << ERR_get_error() << endl;
-	}
-	sslSocket = SSL_new(ctx);
-	if(!sslSocket){
-		cout << "errno: " << errno << endl;
-		throw runtime_error("Error creating SSL socket");
-	}
-	SSL_set_fd(sslSocket, nSocket);
+
+        sslSocket = SSL_new(ctx);
+        if(!sslSocket)
+            throw runtime_error("Error creating SSL socket");
+
+        SSL_set_fd(sslSocket, nSocket);
         if(SSL_connect(sslSocket) != 1)
             throw runtime_error("Error creating SSL connection");
  	
-	} 
-
+    }
 
     virtual HTTPResponse query(string sendBytes){
         int toShip = sendBytes.size();
         int sended = 0;
 
-        do{
-            sended += SSL_write(sslSocket, sendBytes.c_str() + sended, toShip);
-		cout << "1\n";        
-}while(sended != toShip);
+        do
+            sended += SSL_write(sslSocket, sendBytes.c_str() + sended, toShip);;        
+        while(sended != toShip);
 
         int received = 0;
         constexpr int sizeBuff = 65535;
         char buffer[sizeBuff];
 
-        do{
-		 cout << "2\n";
+        do
             received += SSL_read(sslSocket, buffer + received, sizeBuff);
-		cout << "2\n";        
-}while(received > 0 && received == sizeBuff);
-	cout << buffer << endl;
+        while(received > 0 && received == sizeBuff);
         return HTTPResponse(buffer);
     }
 };
@@ -143,5 +135,5 @@ class TelegramBot{
     string token;
 public:
     TelegramBot(string tok);
-    HTTPResponse method(string method, string args);
+    HTTPResponse method(const string& method, const string& args);
 };
