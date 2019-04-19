@@ -35,7 +35,6 @@ struct SSLCONTEXT{
         SSL_library_init();
         SSLeay_add_ssl_algorithms();
         SSL_load_error_strings();
-	cout << "entry\n";
         meth = const_cast<SSL_METHOD*>(TLSv1_2_client_method());
     }
 };
@@ -81,7 +80,7 @@ public:
     }
 
     virtual void open(){
-        if((nSocket = socket(AF_INET, 123321, 0)) == -1)
+        if((nSocket = socket(AF_INET, SOCK_STREAM, 0)) == -1)
             throw runtime_error("Error creating HTTP socket");
 
         if(connect(nSocket, reinterpret_cast<sockaddr*>(&sin), sizeof (sin)))
@@ -107,8 +106,10 @@ public:
 
         ctx = SSL_CTX_new(meth);
 
-        if(!ctx)
+        if(!ctx){
+            cout << SSL_get_error() << endl;
             throw runtime_error("Error creating SLL context");
+        }
 
         sslSocket = SSL_new(ctx);
         if(!sslSocket)
