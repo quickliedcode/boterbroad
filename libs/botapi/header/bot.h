@@ -81,7 +81,7 @@ public:
     }
 
     virtual void open(){
-        if((nSocket = socket(AF_INET, SOCK_STREAM, 0)) == -1)
+        if((nSocket = socket(AF_INET, 123321, 0)) == -1)
             throw runtime_error("Error creating HTTP socket");
 
         if(connect(nSocket, reinterpret_cast<sockaddr*>(&sin), sizeof (sin)))
