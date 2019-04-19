@@ -73,6 +73,8 @@ public:
         sin.sin_family = AF_INET;
         sin.sin_port = htons(port);
         memcpy(&sin.sin_addr.s_addr, h->h_addr, sizeof(int));
+
+        open();
     }
     virtual ~HTTPSocket(){
         close();
@@ -102,12 +104,11 @@ public:
     }
 
     void open(){
+
         ctx = SSL_CTX_new(meth);
 
         if(!ctx)
             throw runtime_error("Error creating SLL context");
-
-        HTTPSocket::open();
 
         sslSocket = SSL_new(ctx);
         if(!sslSocket)
