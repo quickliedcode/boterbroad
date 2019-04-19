@@ -12,6 +12,9 @@ HTTPResponse TelegramBot::method(const string& method, const string& args){
     q.append(method);
     q.append(args);
     q.append(" HTTP/1.1\r\nHOST:api.telegram.org\r\nConnection: Keep-Alive\r\n\r\n");
+
+    cout << endl << endl << "meth: " << q << endl << endl;
+
     return httpsSocket.query(q);
 }
 
