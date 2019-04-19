@@ -148,6 +148,6 @@ public:
     HTTPResponse method(const string& method, const string& args);
     void refresh(){
         httpsSocket.close();
-        httpsSocket("api.telegram.org");
+        httpsSocket.HTTPSSocket("api.telegram.org");
     }
 };
