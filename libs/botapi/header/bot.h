@@ -67,7 +67,7 @@ protected:
 public:
     HTTPSocket(const char* domain, int port = 80){
 
-
+        cout << "1\n";
         hostent* h = gethostbyname(domain);
         sin.sin_family = AF_INET;
         sin.sin_port = htons(port);
@@ -82,6 +82,7 @@ public:
     }
 
     virtual void open(){
+        cout << "2\n";
         if((nSocket = socket(AF_INET, SOCK_STREAM, 0)) == -1)
             throw runtime_error("Error creating HTTP socket");
 
@@ -101,11 +102,12 @@ class HTTPSSocket : public HTTPSocket{
     SSL* sslSocket;
 public:
     HTTPSSocket(const char* domain, int port = 443) : HTTPSocket(domain, port){
+        cout << "3\n";
         open();
     }
 
     void open(){
-
+        cout << "4\n";
         ctx = SSL_CTX_new(meth);
 
         if(!ctx){
