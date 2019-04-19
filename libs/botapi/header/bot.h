@@ -116,7 +116,7 @@ public:
         int sended = 0;
 
         do
-            sended += SSL_write(sslSocket, sendBytes.c_str() + sended, toShip);;        
+            sended += SSL_write(sslSocket, sendBytes.c_str() + sended, toShip);
         while(sended != toShip);
 
         int received = 0;
