@@ -98,6 +98,7 @@ public:
 class HTTPSSocket : public HTTPSocket{
     SSL_CTX* ctx;
     SSL* sslSocket;
+    bool opened;
 public:
     HTTPSSocket(const char* domain, int port = 443) : HTTPSocket(domain, port){
         cout << "3\n";
@@ -106,6 +107,10 @@ public:
 
     void open(){
         cout << "4\n";
+
+        if(opened)
+            open();
+
         SSLCONTEXT::init();
         ctx = SSL_CTX_new(meth);
 
@@ -121,6 +126,7 @@ public:
         SSL_set_fd(sslSocket, nSocket);
         if(SSL_connect(sslSocket) != 1)
             throw runtime_error("Error creating SSL connection");
+        opened = true;
     }
 
     ~HTTPSSocket(){
