@@ -1,9 +1,9 @@
 #include <bot.h>
 
 TelegramBot::TelegramBot(string tok) : httpsSocket("api.telegram.org"), token(tok){
-    json result = method("/getUpdates", "").toJSON();
-    if(result["ok"] == false)
-        throw runtime_error("Invalid bot token");
+    //json result = method("/getUpdates", "").toJSON();
+    //if(result["ok"] == false)
+      //  throw runtime_error("Invalid bot token");
 }
 
 HTTPResponse TelegramBot::method(const string& method, const string& args){
