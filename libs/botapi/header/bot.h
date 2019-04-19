@@ -178,8 +178,10 @@ public:
         method("/sendMessage", "?text=" + text + "&chat_id=" + to_string(chat_id));
     }
     bool sendKnownPhrase(const json& response){
+        cout << "111\n";
         if(!qa.count(response["result"][0]["message"]["text"]))
             return false;
+        cout << "222\n";
         sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
         return true;
     }
