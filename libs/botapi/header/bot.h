@@ -168,18 +168,20 @@ class TelegramBot{
     map<string, string> qa;
     int offset;
 public:
-    TelegramBot(string tok);
+    TelegramBot(const string& tok);
     HTTPResponse method(const string& method, const string& args);
     void refresh(){
         httpsSocket.close();
         httpsSocket.open();
     }
-    void sendMessage(int chat_id, string text){
+    void sendMessage(int chat_id, const string& text){
         method("/sendMessage", "?text=" + text + "&chat_id=" + to_string(chat_id));
     }
-    bool containKnownPhrase(json response){
-
-
+    bool sendKnownPhrase(const json& response){
+        if(!qa.count(response["result"][0]["message"]["text"]))
+            return false;
+        method("/sendMessage", response["result"][0]["message"]["chat"]["id"]);
+        return true;
     }
     json getUpdates(){
         string arg = "?timeout=60&limit=3&offset=";
@@ -191,10 +193,10 @@ public:
         return response;
 
     }
-    void regAnswer(string msg, string answer){
+    void regAnswer(const string& msg, const string& answer){
         qa.insert({msg, answer});
     }
-    void unregAnswer(string msg, string answer){
+    void unregAnswer(const string& msg, const string& answer){
         qa.erase(msg);
     }
 };

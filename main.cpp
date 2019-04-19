@@ -8,7 +8,8 @@ int main(){
 
         json answer = gbot.getUpdates();
         if(answer["result"].size())
-            gbot.sendMessage(answer["result"][0]["message"]["chat"]["id"], "привет");
+            if(!gbot.sendKnownPhrase(answer))
+                gbot.sendMessage(answer["result"][0]["message"]["chat"]["id"], "привет");
         cout << answer << endl;
         gbot.refresh();
 
