@@ -111,6 +111,16 @@ public:
  	
     }
 
+    ~HTTPSSocket(){
+        close();
+    }
+
+    void close(){
+        HTTPSocket::close();
+        SSL_shutdown(sslSocket);
+        SSL_CTX_free(ctx);
+    }
+
     virtual HTTPResponse query(string sendBytes){
         int toShip = sendBytes.size();
         int sended = 0;
@@ -136,4 +146,8 @@ class TelegramBot{
 public:
     TelegramBot(string tok);
     HTTPResponse method(const string& method, const string& args);
+    void refresh(){
+        httpsSocket.close();
+        httpsSocket("api.telegram.org");
+    }
 };
