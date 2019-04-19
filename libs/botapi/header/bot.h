@@ -73,8 +73,6 @@ public:
         sin.sin_port = htons(port);
         memcpy(&sin.sin_addr.s_addr, h->h_addr, sizeof(int));
 
-        SSLCONTEXT::init();
-
         open();
     }
     virtual ~HTTPSocket(){
@@ -108,6 +106,7 @@ public:
 
     void open(){
         cout << "4\n";
+        SSLCONTEXT::init();
         ctx = SSL_CTX_new(meth);
 
         if(!ctx){
