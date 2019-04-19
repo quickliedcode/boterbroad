@@ -17,4 +17,3 @@ HTTPResponse TelegramBot::method(const string& method, const string& args){
 
     return httpsSocket.query(q);
 }
-
