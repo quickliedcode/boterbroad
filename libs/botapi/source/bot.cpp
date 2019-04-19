@@ -6,7 +6,7 @@ TelegramBot::TelegramBot(string tok) : httpsSocket("api.telegram.org"), token(to
         throw runtime_error("Invalid bot token");
 }
 
-HTTPResponse TelegramBot::method(const string& method, const string& args = ""){
+HTTPResponse TelegramBot::method(const string& method, const string& args = string("")){
     string q = "GET https://api.telegram.org/bot";
     q.append(token);
     q.append(method);
