@@ -13,6 +13,7 @@
 #endif
 
 #include <iostream>
+#include <map>
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstring>
@@ -52,6 +53,9 @@ public:
                            if(*str++ == '\n')
                                return const_cast<char*>(str);
 
+    }
+    const char* getText(){
+        return response.c_str();
     }
     json toJSON(){
         return json::parse(findBody(response));
@@ -161,11 +165,18 @@ public:
 class TelegramBot{
     HTTPSSocket httpsSocket;
     string token;
+    map<string, string> qa;
 public:
     TelegramBot(string tok);
     HTTPResponse method(const string& method, const string& args);
     void refresh(){
         httpsSocket.close();
         httpsSocket.open();
+    }
+    void regAnswer(string msg, string answer){
+        qa.insert(msg, answer);
+    }
+    void unregAnswer(string msg, string answer){
+        qa.erase(msg);
     }
 };
