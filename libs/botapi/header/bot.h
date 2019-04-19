@@ -61,30 +61,33 @@ public:
 };
 
 class HTTPSocket{
+private:
+    sockaddr_in sin;
 protected:
     int nSocket;
 public:
     HTTPSocket(const char* domain, int port = 80){
+        SSLCONTEXT::init();
+
         hostent* h = gethostbyname(domain);
-        sockaddr_in sin;
-	sin.sin_family = AF_INET;
+        sin.sin_family = AF_INET;
         sin.sin_port = htons(port);
         memcpy(&sin.sin_addr.s_addr, h->h_addr, sizeof(int));
 
-	SSLCONTEXT::init();
-
-    	if((nSocket = socket(AF_INET, SOCK_STREAM, 0)) == -1)
-            throw runtime_error("Error creating HTTP socket");
-
-        if(connect(nSocket, reinterpret_cast<sockaddr*>(&sin), sizeof (sin))){
-		cout << "errno: " << nSocket << endl;
-            throw runtime_error("Error creating HTTP connection");
-        }
-
+        open();
     }
     virtual ~HTTPSocket(){
         close();
     }
+
+    virtual void open(){
+        if((nSocket = socket(AF_INET, SOCK_STREAM, 0)) == -1)
+            throw runtime_error("Error creating HTTP socket");
+
+        if(connect(nSocket, reinterpret_cast<sockaddr*>(&sin), sizeof (sin)))
+            throw runtime_error("Error creating HTTP connection");
+    }
+
     virtual void close(){
         ::close(nSocket);
     }
@@ -99,8 +102,10 @@ class HTTPSSocket : public HTTPSocket{
 public:
     HTTPSSocket(const char* domain, int port = 443) : HTTPSocket(domain, port), ctx(SSL_CTX_new(meth)){
         if(!ctx)
-		 throw runtime_error("Error creating SLL context");
+            throw runtime_error("Error creating SLL context");
+    }
 
+    void open(){
         sslSocket = SSL_new(ctx);
         if(!sslSocket)
             throw runtime_error("Error creating SSL socket");
@@ -108,7 +113,6 @@ public:
         SSL_set_fd(sslSocket, nSocket);
         if(SSL_connect(sslSocket) != 1)
             throw runtime_error("Error creating SSL connection");
- 	
     }
 
     ~HTTPSSocket(){
