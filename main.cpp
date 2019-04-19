@@ -4,5 +4,5 @@
 
 int main(){
     TelegramBot gb(api_token);
-    //gb.refresh();
+    gb.refresh();
 }
