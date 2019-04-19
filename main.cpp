@@ -4,11 +4,11 @@
 
 int main(){
     TelegramBot gb(api_token);
-    string arg = "?timeout=60&limit=3&offset=0";
-    string offset;
     while(1){
-        HTTPResponse response = gb.method("/getUpdates", arg);
-        cout << response.getText();
+
+        json answer = gb.getUpdates();
+        gb.refresh();
+
     }
-    gb.refresh();
+
 }
