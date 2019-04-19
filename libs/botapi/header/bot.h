@@ -100,7 +100,9 @@ class HTTPSSocket : public HTTPSocket{
     SSL* sslSocket;
 
 public:
-    HTTPSSocket(const char* domain, int port = 443) : HTTPSocket(domain, port){}
+    HTTPSSocket(const char* domain, int port = 443) : HTTPSocket(domain, port){
+        open();
+    }
 
     void open(){
         HTTPSocket::open();
