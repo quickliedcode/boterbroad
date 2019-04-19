@@ -175,6 +175,7 @@ public:
         httpsSocket.open();
     }
     json getUpdates(){
+        cout << endl << "offset: " << offset << endl;
         string arg = "?timeout=60&limit=3&offset=";
         arg.append(to_string(offset));
         json response = method("/getUpdates", arg).toJSON();
