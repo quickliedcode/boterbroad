@@ -106,6 +106,7 @@ public:
     }
 
     void open(){
+        HTTPSocket::open();
         sslSocket = SSL_new(ctx);
         if(!sslSocket)
             throw runtime_error("Error creating SSL socket");
@@ -152,6 +153,6 @@ public:
     HTTPResponse method(const string& method, const string& args);
     void refresh(){
         httpsSocket.close();
-        httpsSocket("api.telegram.org");
+        httpsSocket.open();
     }
 };
