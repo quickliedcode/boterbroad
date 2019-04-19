@@ -66,12 +66,14 @@ protected:
     int nSocket;
 public:
     HTTPSocket(const char* domain, int port = 80){
-        SSLCONTEXT::init();
+
 
         hostent* h = gethostbyname(domain);
         sin.sin_family = AF_INET;
         sin.sin_port = htons(port);
         memcpy(&sin.sin_addr.s_addr, h->h_addr, sizeof(int));
+
+        SSLCONTEXT::init();
 
         open();
     }
