@@ -155,11 +155,16 @@ public:
         constexpr int sizeBuff = 65535;
         char buffer[sizeBuff]{0};
 
-        cout << buffer << endl;
+
+
 
         do
             received += SSL_read(sslSocket, buffer + received, sizeBuff);
         while(received > 0 && received == sizeBuff);
+
+        cout << "buffer:\n\n";
+        cout << buffer << endl;
+
         return HTTPResponse(buffer);
     }
 };
