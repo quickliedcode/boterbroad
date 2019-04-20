@@ -4,10 +4,10 @@
 
 int main(){
     TelegramBot gbot(api_token);
+    gbot.regAnswer("/start", "text");
     while(1){
 
         json answer = gbot.getUpdates();
-        gbot.regAnswer("/start", "text");
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){
                 cout << "333\n";
