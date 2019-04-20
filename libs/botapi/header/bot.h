@@ -155,6 +155,8 @@ public:
         constexpr int sizeBuff = 65535;
         char buffer[sizeBuff]{0};
 
+        cout << buffer << endl;
+
         do
             received += SSL_read(sslSocket, buffer + received, sizeBuff);
         while(received > 0 && received == sizeBuff);
@@ -187,7 +189,7 @@ public:
     json getUpdates(){
         string arg = "?timeout=60&limit=3&offset=";
         arg.append(to_string(offset));
-        cout << endl << "arg: " << arg << endl;
+        //cout << endl << "arg: " << arg << endl;
         json response = method("/getUpdates", arg).toJSON();
         offset = response["result"][0]["update_id"];
         offset++;
