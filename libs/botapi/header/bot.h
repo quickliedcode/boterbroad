@@ -191,7 +191,7 @@ public:
             return false;
         }
 
-
+cout << endl << endl << " ------ here 13 ------ " << endl << endl;
         sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
         return true;
     }
