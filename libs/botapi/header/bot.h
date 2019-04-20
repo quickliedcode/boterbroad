@@ -186,7 +186,7 @@ public:
     }
     bool sendKnownPhrase(json& response){
         cout << endl << endl << " ------ here 11 ------ " << endl << endl;
-        if(response["result"][0]["message"]["entities"].is_null() && !qa.count(response["result"][0]["message"]["text"])){
+        if(response["result"][0]["message"]["text"].is_null() && !qa.count(response["result"][0]["message"]["text"])){
             cout << endl << endl << " ------ here 12 ------ " << endl << endl;
             return false;
         }
