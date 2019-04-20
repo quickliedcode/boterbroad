@@ -179,10 +179,17 @@ public:
     }
     bool sendKnownPhrase(const json& response){
         cout << "111\n";
-        if(!qa.count(response["result"][0]["message"]["text"]))
+        cout << "after\n";
+        if(!qa.count(response["result"][0]["message"]["text"])){
+            cout << "before\n";
             return false;
+
+        }
+        cout << "before 2\n";
         cout << "222\n";
+        cout << "after 2\n";
         sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
+        cout << "before 3\n";
         return true;
     }
     json getUpdates(){
