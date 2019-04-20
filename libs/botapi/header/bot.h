@@ -153,7 +153,7 @@ public:
 
         int received = 0;
         constexpr int sizeBuff = 65535;
-        char buffer[sizeBuff];
+        char buffer[sizeBuff]{0};
 
         do
             received += SSL_read(sslSocket, buffer + received, sizeBuff);
