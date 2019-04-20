@@ -14,9 +14,12 @@ int main(){
         //cout << answer << endl;
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){
+
+                cout << endl << endl << " ------ here ------ " << endl << endl;
+
                 gbot.sendMessage(answer["result"][0]["message"]["chat"]["id"], accept_message);
 
-                cout << "here" << endl << endl;
+                cout << endl << endl << " ------ here ------ " << endl << endl;
 
                 int message_id = 0;
                 int from_chat_id = 0;
