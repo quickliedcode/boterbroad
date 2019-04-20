@@ -10,16 +10,21 @@ int main(){
     TelegramBot gbot(api_token);
     gbot.regAnswer("/start", start_message);
     while(1){
+
+        cout << endl << endl << " ------ here 1 ------ " << endl << endl;
+
         json answer = gbot.getUpdates();
-        //cout << answer << endl;
+
+        cout << endl << endl << " ------ here 2 ------ " << endl << endl;
+
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){
 
-                cout << endl << endl << " ------ here ------ " << endl << endl;
+                cout << endl << endl << " ------ here 3 ------ " << endl << endl;
 
                 gbot.sendMessage(answer["result"][0]["message"]["chat"]["id"], accept_message);
 
-                cout << endl << endl << " ------ here ------ " << endl << endl;
+                cout << endl << endl << " ------ here 4 ------ " << endl << endl;
 
                 int message_id = 0;
                 int from_chat_id = 0;
