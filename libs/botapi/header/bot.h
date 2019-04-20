@@ -185,13 +185,9 @@ public:
         method("/sendMessage", "?text=" + text + "&chat_id=" + to_string(chat_id));
     }
     bool sendKnownPhrase(json& response){
-        cout << endl << endl << " ------ here 11 ------ " << endl << endl;
-        if(response["result"][0]["message"]["text"].is_null() && !qa.count(response["result"][0]["message"]["text"])){
-            cout << endl << endl << " ------ here 12 ------ " << endl << endl;
+        if(!response["result"][0]["message"]["text"].is_null() && !qa.count(response["result"][0]["message"]["text"])){
             return false;
-        }
 
-cout << endl << endl << " ------ here 13 ------ " << endl << endl;
         sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
         return true;
     }
