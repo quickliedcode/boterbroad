@@ -154,6 +154,7 @@ public:
         int received = 0;
         constexpr int sizeBuff = 65535;
         char buffer[sizeBuff];
+        memset(buffer, 0, sizeBuff);
 
         do
             received += SSL_read(sslSocket, buffer + received, sizeBuff);
