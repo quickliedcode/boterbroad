@@ -43,7 +43,7 @@ struct SSLCONTEXT{
 class HTTPResponse{
     string response;
 public:
-    HTTPResponse(const string& msg) : response(msg){}
+    HTTPResponse(string msg) : response(msg){}
     static const char* findBody(const string& s){
         const char* str = s.c_str();
         while(*str != 0)
