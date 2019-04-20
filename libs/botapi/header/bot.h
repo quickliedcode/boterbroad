@@ -184,7 +184,7 @@ public:
     void sendMessage(int chat_id, const string& text){
         method("/sendMessage", "?text=" + text + "&chat_id=" + to_string(chat_id));
     }
-    bool sendKnownPhrase(const json& response){
+    bool sendKnownPhrase(json& response){
         cout << endl << endl << " ------ here 11 ------ " << endl << endl;
         if(response["result"][0]["message"]["entities"].is_null() && !qa.count(response["result"][0]["message"]["text"])){
             cout << endl << endl << " ------ here 12 ------ " << endl << endl;
