@@ -188,6 +188,7 @@ public:
         if(response["result"][0]["message"]["text"].is_null() && !qa.count(response["result"][0]["message"]["text"]))
             return false;
 
+
         sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
         return true;
     }
