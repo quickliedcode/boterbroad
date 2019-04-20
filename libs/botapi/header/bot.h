@@ -43,8 +43,8 @@ struct SSLCONTEXT{
 class HTTPResponse{
     string response;
 public:
-    HTTPResponse(char* ptrmessage) : response(ptrmessage){}
-    static const char* findBody(string s){
+    HTTPResponse(const string& msg) : response(msg){}
+    static const char* findBody(const string& s){
         const char* str = s.c_str();
         while(*str != 0)
                if(*str++ == '\r')
@@ -154,7 +154,6 @@ public:
         int received = 0;
         constexpr int sizeBuff = 65535;
         char buffer[sizeBuff];
-        memset(buffer, 0, sizeBuff);
 
         do
             received += SSL_read(sslSocket, buffer + received, sizeBuff);
