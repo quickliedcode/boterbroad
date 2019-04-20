@@ -43,7 +43,7 @@ struct SSLCONTEXT{
 class HTTPResponse{
     string response;
 public:
-    HTTPResponse(string msg) : response(msg){}
+    HTTPResponse(const string& msg) : response(msg){}
     static const char* findBody(const string& s){
         const char* str = s.c_str();
         while(*str != 0)
@@ -178,18 +178,10 @@ public:
         method("/sendMessage", "?text=" + text + "&chat_id=" + to_string(chat_id));
     }
     bool sendKnownPhrase(const json& response){
-        cout << "111\n";
-        cout << "after\n";
-        if(!qa.count(response["result"][0]["message"]["text"])){
-            cout << "before\n";
+        if(!qa.count(response["result"][0]["message"]["text"]))
             return false;
 
-        }
-        cout << "before 2\n";
-        cout << "222\n";
-        cout << "after 2\n";
         sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
-        cout << "before 3\n";
         return true;
     }
     json getUpdates(){
@@ -200,7 +192,6 @@ public:
         offset = response["result"][0]["update_id"];
         offset++;
         return response;
-
     }
     void regAnswer(const string& msg, const string& answer){
         qa.insert({msg, answer});
