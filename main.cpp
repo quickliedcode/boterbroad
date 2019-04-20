@@ -10,16 +10,25 @@ int main(){
     TelegramBot gbot(api_token);
     gbot.regAnswer("/start", start_message);
     while(1){
-
         json answer = gbot.getUpdates();
         cout << answer << endl;
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){
                 gbot.sendMessage(answer["result"][0]["message"]["chat"]["id"], accept_message);
+
+                int message_id = 0;
+                int from_chat_id = 0;
+                if(!answer["result"][0]["message"].is_null()){
+                    message_id = answer["result"][0]["message"]["message_id"];
+                    from_chat_id = answer["result"][0]["message"]["chat"]["id"];
+                }else{
+                    message_id = answer["result"][0]["channel_post"]["message_id"];
+                    from_chat_id = answer["result"][0]["channel_post"]["chat"]["id"];
+                }
+
+                gbot.forwardMessage("@growbucket", from_chat_id, message_id);
             }
 
         gbot.refresh();
-
     }
-
 }

@@ -199,4 +199,17 @@ public:
     void unregAnswer(const string& msg, const string& answer){
         qa.erase(msg);
     }
+
+    void forwardMessage(int chat_id, int from_chat_id, int message_id){
+        method("/forwardMessage", "?message_id=" + to_string(message_id) + "&chat_id=" + to_string(chat_id) + "&from_chat_id=" + to_string(from_chat_id));
+    }
+    void forwardMessage(string chat_id, int from_chat_id, int message_id){
+        method("/forwardMessage", "?message_id=" + to_string(message_id) + "&chat_id=" + chat_id + "&from_chat_id=" + to_string(from_chat_id));
+    }
+    void forwardMessage(int chat_id, string from_chat_id, int message_id){
+        method("/forwardMessage", "?message_id=" + to_string(message_id) + "&chat_id=" + to_string(chat_id) + "&from_chat_id=" + from_chat_id);
+    }
+    void forwardMessage(string chat_id, string from_chat_id, int message_id){
+        method("/forwardMessage", "?message_id=" + to_string(message_id) + "&chat_id=" + chat_id + "&from_chat_id=" + from_chat_id);
+    }
 };
