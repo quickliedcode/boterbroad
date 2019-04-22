@@ -201,7 +201,7 @@ public:
     json getUpdates(int delay = 120){
         string arg = "?limit=1&offset=";
         arg.append(to_string(offset));
-        arg.append("&timeout=")
+        arg.append("&timeout=");
         arg.append(to_string(delay));
         json response = method("/getUpdates", arg).toJSON();
 
@@ -219,7 +219,7 @@ public:
     json peekUpdates(int delay = 120){
         string arg = "?limit=1&offset=";
         arg.append(to_string(offset));
-        arg.append("&timeout=")
+        arg.append("&timeout=");
         arg.append(to_string(delay));
         json response = method("/getUpdates", arg).toJSON();
         return response;
