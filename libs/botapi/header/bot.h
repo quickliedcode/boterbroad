@@ -186,7 +186,7 @@ public:
             if(!response["result"][0]["message"]["text"].is_null())
                 if(!qa.count(response["result"][0]["message"]["text"]))
                     return false;
-        } catch (nlohmann::detail::type_error& err) {
+        } catch (...) {
             cout << "[error]:\n";
             cout << response;
         }
