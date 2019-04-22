@@ -16,7 +16,7 @@ int main(){
 
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){      
-                gbot.sendMessage(answer["result"][0]["message"]["chat"]["id"], accept_message);
+                gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_message);
 
                 int message_id = 0;
                 int from_chat_id = 0;
