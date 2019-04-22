@@ -182,9 +182,15 @@ public:
         method("/sendMessage", "?text=" + text + "&chat_id=" + to_string(chat_id));
     }
     bool sendKnownPhrase(json& response){
-        if(!response["result"][0]["message"]["text"].is_null())
-            if(!qa.count(response["result"][0]["message"]["text"]))
-                return false;
+        try {
+            if(!response["result"][0]["message"]["text"].is_null())
+                if(!qa.count(response["result"][0]["message"]["text"]))
+                    return false;
+        } catch (nlohmann::detail::type_error& err) {
+            cout << "[error]:\n";
+            cout << response;
+        }
+
 
         sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
         return true;
