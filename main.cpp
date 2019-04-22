@@ -28,7 +28,7 @@ int main(){
                     from_chat_id = answer["result"][0]["channel_post"]["chat"]["id"];
                 }
 
-                if(answer["result"][0]["forward_from"].is_null()){
+                if(answer["result"][0]["message"]["forward_sender_name"].is_null()){
                     gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
                     gbot.sendMessage("@growbucket", "🏅Отправил: " + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]));
                 }
