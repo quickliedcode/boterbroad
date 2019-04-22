@@ -15,8 +15,7 @@ int main(){
         cout << "size: " << answer["result"].size() << endl;
 
         if(answer["result"].size())
-            if(!gbot.sendKnownPhrase(answer)){
-
+            if(!gbot.sendKnownPhrase(answer)){      
                 gbot.sendMessage(answer["result"][0]["message"]["chat"]["id"], accept_message);
 
                 int message_id = 0;
@@ -29,7 +28,10 @@ int main(){
                     from_chat_id = answer["result"][0]["channel_post"]["chat"]["id"];
                 }
 
-                gbot.forwardMessage("@growbucket", from_chat_id, message_id);
+                if(answer["result"][0]["forward_from"].is_null())
+                    gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
+                else
+                    gbot.forwardMessage("@growbucket", from_chat_id, message_id);
             }
         gbot.refresh();
     }

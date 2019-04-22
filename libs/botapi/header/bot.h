@@ -181,6 +181,10 @@ public:
     void sendMessage(int chat_id, const string& text){
         method("/sendMessage", "?text=" + text + "&chat_id=" + to_string(chat_id));
     }
+    void sendMessage(const string& chat_id, const string& text){
+        method("/sendMessage", "?text=" + text + "&chat_id=" + chat_id);
+    }
+
     bool sendKnownPhrase(json& response){
         if(!response["result"][0]["message"]["text"].is_null() && qa.count(response["result"][0]["message"]["text"])){
             sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
@@ -189,7 +193,7 @@ public:
         return false;
     }
     json getUpdates(){
-        string arg = "?timeout=2&limit=1&offset=";
+        string arg = "?timeout=120&limit=1&offset=";
         arg.append(to_string(offset));
         json response = method("/getUpdates", arg).toJSON();
 
