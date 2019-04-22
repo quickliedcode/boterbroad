@@ -7,6 +7,7 @@
 #define accept_message "Сообщение принято. Надеюсь, оно действительно смешное"
 
 int main(){
+    cout << "test\n";
     TelegramBot gbot(api_token);
     gbot.regAnswer("/start", start_message);
     while(1){
