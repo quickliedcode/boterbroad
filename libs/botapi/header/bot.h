@@ -182,7 +182,7 @@ public:
         method("/sendMessage", "?text=" + text + "&chat_id=" + to_string(chat_id));
     }
     bool sendKnownPhrase(json& response){
-        if(!response["result"][0]["message"]["text"].is_null() && !qa.count(response["result"][0]["message"]["text"])){
+        if(!response["result"][0]["message"]["text"].is_null() && qa.count(response["result"][0]["message"]["text"])){
             sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
             return true;
         }
