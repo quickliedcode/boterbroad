@@ -198,9 +198,11 @@ public:
         }
         return false;
     }
-    json getUpdates(){
-        string arg = "?timeout=120&limit=1&offset=";
+    json getUpdates(int delay = 120){
+        string arg = "?limit=1&offset=";
         arg.append(to_string(offset));
+        arg.append("&timeout=")
+        arg.append(to_string(delay));
         json response = method("/getUpdates", arg).toJSON();
 
         if(!response["result"].size())
@@ -211,6 +213,15 @@ public:
 
         cout << "query:" << endl << arg;
 
+        return response;
+    }
+
+    json peekUpdates(int delay = 120){
+        string arg = "?limit=1&offset=";
+        arg.append(to_string(offset));
+        arg.append("&timeout=")
+        arg.append(to_string(delay));
+        json response = method("/getUpdates", arg).toJSON();
         return response;
     }
     void regAnswer(const string& msg, const string& answer){
