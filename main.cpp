@@ -11,7 +11,7 @@ int main(){
     gbot.regAnswer("/start", start_message);
     while(1){
 
-        cout << endl << endl << " ------ here 1 ------ " << endl << endl;
+        cout << endl << endl << " ------ here 1488 ------ " << endl << endl;
 
         json answer = gbot.getUpdates();
 
