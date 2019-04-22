@@ -4,7 +4,9 @@
 #define start_message "Приветствую, хихикающий прохожий. Пришли мне смешные сообщения для формата Галереи, и," \
                         " если нам понравится пост - мы обязательно его выложим! Можно пересылать боту сообщения! " \
                         "Если я не отвечаю - не волнуйся. Сообщения все-равно попадают в очередь"
-#define accept_message "Сообщение принято. Надеюсь, оно действительно смешное"
+#define accept_message "Сообщение принято. Спасибо за активность"
+#define accept_block_message "Блок сообщений принят. Спасибо за активность"
+
 
 static int sender_id;
 
@@ -16,15 +18,15 @@ int main(){
 
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){      
-                gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_message);
 
                 sender_id = answer["result"][0]["message"]["from"]["id"];
 
-
                 bool close_block = false;
                 json peek_answer = gbot.peekUpdates(0);
-                if(!peek_answer["result"].size() || peek_answer["result"][0]["message"]["from"]["id"] != sender_id)
+                if(!peek_answer["result"].size() || peek_answer["result"][0]["message"]["from"]["id"] != sender_id){
                     close_block = true;
+                    gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_block_message);
+                }
 
 
                 int message_id = 0;
@@ -44,7 +46,7 @@ int main(){
                     }
                     else
                         gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
-
+                    gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_message);
                     if(close_block)
                         gbot.sendMessage("@growbucket", "🏅 Отправил: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
                 }
