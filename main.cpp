@@ -28,10 +28,17 @@ int main(){
                     from_chat_id = answer["result"][0]["channel_post"]["chat"]["id"];
                 }
 
-                if(answer["result"][0]["forward_from"].is_null())
-                    gbot.sendMessage("@growbucket", "text");
-                else
+                if(answer["result"][0]["forward_from"].is_null()){
+                    gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
+                    gbot.sendMessage("@growbucket", "🏅Отправил: " + answer["result"][0]["message"]["from"]["first_name"] + " " + answer["result"][0]["message"]["from"]["last_name"]);
+                }
+                else{
                     gbot.forwardMessage("@growbucket", from_chat_id, message_id);
+                    gbot.sendMessage("@growbucket", "🏓Переслал: " + answer["result"][0]["message"]["from"]["first_name"] + " " + answer["result"][0]["message"]["from"]["last_name"]);
+                }
+
+
+
             }
         gbot.refresh();
     }
