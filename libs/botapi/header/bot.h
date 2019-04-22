@@ -193,7 +193,7 @@ public:
         return true;
     }
     json getUpdates(){
-        cout << "bequery:" << endl;
+        cout << " bequery: " << endl;
         string arg = "?timeout=60&limit=1&offset=";
         arg.append(to_string(offset));
         //cout << endl << "arg: " << arg << endl;
