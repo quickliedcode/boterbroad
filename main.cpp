@@ -29,7 +29,7 @@ int main(){
                 }
 
                 if(answer["result"][0]["forward_from"].is_null())
-                    gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
+                    gbot.sendMessage("@growbucket", string(answer["result"][0]["message"]["text"]));
                 else
                     gbot.forwardMessage("@growbucket", from_chat_id, message_id);
             }
