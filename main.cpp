@@ -28,16 +28,14 @@ int main(){
                     from_chat_id = answer["result"][0]["channel_post"]["chat"]["id"];
                 }
 
-                if(answer["result"][0]["message"]["forward_sender_name"].is_null() && answer["result"][0]["message"]["forward_from_chat"].is_null()){
+                if(answer["result"][0]["message"]["forward_sender_name"].is_null() && answer["result"][0]["message"]["forward_from_chat"].is_null() && answer["result"][0]["message"]["forward_from"].is_null()){
                     gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
                     gbot.sendMessage("@growbucket", "🏅 Отправил: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
                 }
                 else{
                     gbot.forwardMessage("@growbucket", from_chat_id, message_id);
-                    gbot.sendMessage("@growbucket", "🏓 Переслал: " + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]));
+                    gbot.sendMessage("@growbucket", "🏓 Переслал: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
                 }
-
-
 
             }
         gbot.refresh();
