@@ -34,7 +34,7 @@ int main(){
                 }
                 else{
                     gbot.forwardMessage("@growbucket", from_chat_id, message_id);
-                    gbot.sendMessage("@growbucket", "🏓Переслал: " + string(answer["result"][0]["chat"]["first_name"]) + " " + string(answer["result"][0]["chat"]["last_name"]));
+                    gbot.sendMessage("@growbucket", "🏓Переслал: " + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]));
                 }
 
 
