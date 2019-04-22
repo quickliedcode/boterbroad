@@ -184,6 +184,12 @@ public:
     void sendMessage(const string& chat_id, const string& text){
         method("/sendMessage", "?text=" + text + "&chat_id=" + chat_id + "&parse_mode=HTML");
     }
+    void sendPhoto(int chat_id, const string& photo){
+        method("/sendPhoto", "?photo=" + to_string(photo) + "&chat_id=" + chat_id);
+    }
+    void sendPhoto(const string& chat_id, const string& photo){
+        method("/sendPhoto", "?photo=" + photo + "&chat_id=" + chat_id);
+    }
 
     bool sendKnownPhrase(json& response){
         if(!response["result"][0]["message"]["text"].is_null() && qa.count(response["result"][0]["message"]["text"])){

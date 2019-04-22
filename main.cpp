@@ -29,7 +29,12 @@ int main(){
                 }
 
                 if(answer["result"][0]["message"]["forward_sender_name"].is_null() && answer["result"][0]["message"]["forward_from_chat"].is_null() && answer["result"][0]["message"]["forward_from"].is_null()){
-                    gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
+                    if(answer["result"][0]["message"]["text"].is_null()){
+                        int count_of_photos = answer["result"][0]["photo"].size();
+                        gbot.sendPhoto("@growbucket", answer["result"][0]["message"]["photo"][count_of_photos-1]["file_id"]);
+                    }
+                    else
+                        gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
                     gbot.sendMessage("@growbucket", "🏅 Отправил: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
                 }
                 else{
