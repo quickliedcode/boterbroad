@@ -23,10 +23,9 @@ int main(){
 
                 bool close_block = false;
                 json peek_answer = gbot.peekUpdates(0);
-                if(!peek_answer["result"].size() || peek_answer["result"][0]["message"]["from"]["id"] != sender_id){
+                if(!peek_answer["result"].size() || peek_answer["result"][0]["message"]["from"]["id"] != sender_id)
                     close_block = true;
-                    gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_block_message);
-                }
+
 
 
                 int message_id = 0;
@@ -46,14 +45,18 @@ int main(){
                     }
                     else
                         gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
-                    gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_message);
-                    if(close_block)
+
+                    if(close_block){
                         gbot.sendMessage("@growbucket", "🏅 Отправил: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
+                        gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_message);
+                    }
                 }
                 else{
                     gbot.forwardMessage("@growbucket", from_chat_id, message_id);
-                    if(close_block)
+                    if(close_block){
                         gbot.sendMessage("@growbucket", "🏓 Переслал: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
+                        gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_block_message);
+                    }
                 }
 
 
