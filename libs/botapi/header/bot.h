@@ -187,7 +187,7 @@ public:
 
     bool sendKnownPhrase(json& response){
         if(!response["result"][0]["message"]["text"].is_null() && qa.count(response["result"][0]["message"]["text"])){
-            sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
+            sendMessage(int(response["result"][0]["message"]["chat"]["id"]), qa[response["result"][0]["message"]["text"]]);
             return true;
         }
         return false;
