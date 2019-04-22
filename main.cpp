@@ -30,7 +30,7 @@ int main(){
 
                 if(answer["result"][0]["message"]["forward_sender_name"].is_null() && answer["result"][0]["message"]["forward_from_chat"].is_null()){
                     gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
-                    gbot.sendMessage("@growbucket", "🏅 Отправил: " + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]));
+                    gbot.sendMessage("@growbucket", "🏅 Отправил: " + "[" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "](@" + answer["result"][0]["message"]["from"]["username"]) + ")");
                 }
                 else{
                     gbot.forwardMessage("@growbucket", from_chat_id, message_id);
