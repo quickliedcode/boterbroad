@@ -33,13 +33,8 @@ int main(){
                     gbot.sendMessage("@growbucket", "🏅 Отправил: " + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]));
                 }
                 else{
-                    if(answer["result"][0]["message"]["forward_from_chat"].is_null()){
-                        gbot.forwardMessage("@growbucket", from_chat_id, message_id);
-                        gbot.sendMessage("@growbucket", "🏓 Переслал: " + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]));
-                    }else{
-                        gbot.forwardMessage("@growbucket", from_chat_id, message_id);
-                        gbot.sendMessage("@growbucket", "🏓 Переслано из канала: " + string(answer["result"][0]["message"]["forward_from_chat"]["title"]));
-                    }
+                    gbot.forwardMessage("@growbucket", from_chat_id, message_id);
+                    gbot.sendMessage("@growbucket", "🏓 Переслал: " + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]));
                 }
 
 
