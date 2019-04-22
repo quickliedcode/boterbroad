@@ -189,11 +189,13 @@ public:
         return false;
     }
     json getUpdates(){
-        cout << " bequery: " << endl;
         string arg = "?timeout=2&limit=1&offset=";
         arg.append(to_string(offset));
-        //cout << endl << "arg: " << arg << endl;
         json response = method("/getUpdates", arg).toJSON();
+
+        if(!response["result"].size())
+            return response;
+
         offset = response["result"][0]["update_id"];
         offset++;
 

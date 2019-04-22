@@ -11,6 +11,8 @@ int main(){
     gbot.regAnswer("/start", start_message);
     while(1){
 
+        cout << "before: "
+
         json answer = gbot.getUpdates();
 
         cout << "size: " << answer["result"].size() << endl;
