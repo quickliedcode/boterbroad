@@ -186,14 +186,12 @@ public:
             if(!response["result"][0]["message"]["text"].is_null())
                 if(!qa.count(response["result"][0]["message"]["text"]))
                     return false;
+            sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
+            return true;
         } catch (...) {
             cout << "[error]:\n";
             cout << response;
         }
-
-
-        sendMessage(response["result"][0]["message"]["chat"]["id"], qa[response["result"][0]["message"]["text"]]);
-        return true;
     }
     json getUpdates(){
         cout << " bequery: " << endl;

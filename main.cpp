@@ -27,17 +27,23 @@ int main(){
 
                 cout << endl << endl << " ------ here 4 ------ " << endl << endl;
 
-                int message_id = 0;
-                int from_chat_id = 0;
-                if(!answer["result"][0]["message"].is_null()){
-                    message_id = answer["result"][0]["message"]["message_id"];
-                    from_chat_id = answer["result"][0]["message"]["chat"]["id"];
-                }else{
-                    message_id = answer["result"][0]["channel_post"]["message_id"];
-                    from_chat_id = answer["result"][0]["channel_post"]["chat"]["id"];
+                try {
+                    int message_id = 0;
+                    int from_chat_id = 0;
+                    if(!answer["result"][0]["message"].is_null()){
+                        message_id = answer["result"][0]["message"]["message_id"];
+                        from_chat_id = answer["result"][0]["message"]["chat"]["id"];
+                    }else{
+                        message_id = answer["result"][0]["channel_post"]["message_id"];
+                        from_chat_id = answer["result"][0]["channel_post"]["chat"]["id"];
+                    }
+
+                    gbot.forwardMessage("@growbucket", from_chat_id, message_id);
+                } catch (...) {
+                    cout << "errorka";
                 }
 
-                gbot.forwardMessage("@growbucket", from_chat_id, message_id);
+
             }
 
         gbot.refresh();
