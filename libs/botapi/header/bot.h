@@ -199,6 +199,9 @@ public:
         json response = method("/getUpdates", arg).toJSON();
         offset = response["result"][0]["update_id"];
         offset++;
+
+        cout << "query:" << endl << arg;
+
         return response;
     }
     void regAnswer(const string& msg, const string& answer){
