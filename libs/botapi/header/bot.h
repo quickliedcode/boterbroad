@@ -182,7 +182,7 @@ public:
         method("/sendMessage", "?text=" + text + "&chat_id=" + to_string(chat_id));
     }
     void sendMessage(const string& chat_id, const string& text){
-        method("/sendMessage", "?text=" + text + "&chat_id=" + chat_id);
+        method("/sendMessage", "?text=" + text + "&chat_id=" + chat_id + "&parse_mode=HTML");
     }
 
     bool sendKnownPhrase(json& response){
