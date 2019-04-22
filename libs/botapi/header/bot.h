@@ -193,7 +193,7 @@ public:
         return true;
     }
     json getUpdates(){
-        string arg = "?timeout=60&limit=3&offset=";
+        string arg = "?timeout=60&limit=1&offset=";
         arg.append(to_string(offset));
         //cout << endl << "arg: " << arg << endl;
         json response = method("/getUpdates", arg).toJSON();
