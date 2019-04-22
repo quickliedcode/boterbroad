@@ -6,13 +6,13 @@
                         "Если я не отвечаю - не волнуйся. Сообщения все-равно попадают в очередь"
 #define accept_message "Сообщение принято. Надеюсь, оно действительно смешное"
 
+static int last_sender = 0;
+
 int main(){
     TelegramBot gbot(api_token);
     gbot.regAnswer("/start", start_message);
     while(1){
         json answer = gbot.getUpdates();
-
-        cout << "size: " << answer["result"].size() << endl;
 
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){      
@@ -35,12 +35,16 @@ int main(){
                     }
                     else
                         gbot.sendMessage("@growbucket", answer["result"][0]["message"]["text"]);
-                    gbot.sendMessage("@growbucket", "🏅 Отправил: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
+
+                    if(answer["result"][0]["message"]["from"]["id"] != last_sender)
+                        gbot.sendMessage("@growbucket", "🏅 Отправил: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
                 }
                 else{
                     gbot.forwardMessage("@growbucket", from_chat_id, message_id);
-                    gbot.sendMessage("@growbucket", "🏓 Переслал: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
+                    if(answer["result"][0]["message"]["from"]["id"] != last_sender)
+                        gbot.sendMessage("@growbucket", "🏓 Переслал: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
                 }
+                last_sender = answer["result"][0]["message"]["from"]["id"];
 
             }
         gbot.refresh();
