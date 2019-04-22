@@ -185,7 +185,7 @@ public:
         method("/sendMessage", "?text=" + text + "&chat_id=" + chat_id + "&parse_mode=HTML");
     }
     void sendPhoto(int chat_id, const string& photo){
-        method("/sendPhoto", "?photo=" + to_string(photo) + "&chat_id=" + chat_id);
+        method("/sendPhoto", "?photo=" + photo + "&chat_id=" + to_string(chat_id));
     }
     void sendPhoto(const string& chat_id, const string& photo){
         method("/sendPhoto", "?photo=" + photo + "&chat_id=" + chat_id);
