@@ -13,6 +13,8 @@ int main(){
 
         json answer = gbot.getUpdates();
 
+        cout << "size: " << answer["result"].size() << endl;
+
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){
 
