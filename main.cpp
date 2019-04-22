@@ -23,7 +23,7 @@ int main(){
 
                 cout << endl << endl << " ------ here 3 ------ " << endl << endl;
 
-                gbot.sendMessage(answer["result"][0]["message"]["chat"]["id"], accept_message);
+                //gbot.sendMessage(answer["result"][0]["message"]["chat"]["id"], accept_message);
 
                 cout << endl << endl << " ------ here 4 ------ " << endl << endl;
 
