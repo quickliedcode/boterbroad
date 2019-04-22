@@ -30,7 +30,7 @@ int main(){
 
                 if(answer["result"][0]["message"]["forward_sender_name"].is_null() && answer["result"][0]["message"]["forward_from_chat"].is_null() && answer["result"][0]["message"]["forward_from"].is_null()){
                     if(answer["result"][0]["message"]["text"].is_null()){
-                        int count_of_photos = answer["result"][0]["photo"].size();
+                        int count_of_photos = answer["result"][0]["message"]["photo"].size();
                         gbot.sendPhoto("@growbucket", answer["result"][0]["message"]["photo"][count_of_photos-1]["file_id"]);
                     }
                     else
