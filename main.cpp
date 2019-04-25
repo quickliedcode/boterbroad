@@ -19,7 +19,7 @@ int main(){
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){      
 
-                if(!answer["result"].is_array())
+                if(answer["result"].is_object())
                     continue;
 
                 sender_id = answer["result"][0]["message"]["from"]["id"];
