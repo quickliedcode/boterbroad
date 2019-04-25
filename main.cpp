@@ -29,7 +29,7 @@ int main(){
 
 
                 int message_id = 0;
-                long long from_chat_id = 0;
+                int from_chat_id = 0;
                 if(!answer["result"][0]["message"].is_null()){
                     message_id = answer["result"][0]["message"]["message_id"];
                     from_chat_id = answer["result"][0]["message"]["chat"]["id"];
@@ -38,7 +38,7 @@ int main(){
                     from_chat_id = answer["result"][0]["channel_post"]["chat"]["id"];
                 }
 
-                if(from_chat_id == -1001401603714)
+                if(from_chat_id == int(-1001401603714))
                     continue;
 
 
