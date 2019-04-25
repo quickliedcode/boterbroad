@@ -59,7 +59,7 @@ int main(){
                             gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_block_message);
                         }
                     } catch (...) {
-                        gbot.sendMessage("@growbucket", "Ошибка бота. JSON: " + answer);
+                        gbot.sendMessage("@growbucket", "Ошибка бота. JSON: " + string(answer));
                     }
 
                 }
