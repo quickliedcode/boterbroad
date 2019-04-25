@@ -19,11 +19,6 @@ int main(){
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){      
 
-                if(!answer["result"].is_array())
-                    if(!answer["result"]["chat"]["username"].is_null())
-                        if(answer["result"]["chat"]["username"] == "growbucket")
-                            continue;
-
                 sender_id = answer["result"][0]["message"]["from"]["id"];
 
                 bool close_block = false;
