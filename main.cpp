@@ -19,8 +19,9 @@ int main(){
         if(answer["result"].size())
             if(!gbot.sendKnownPhrase(answer)){      
 
-                if(answer["result"].is_object())
-                    continue;
+                if(!answer["result"]["chat"]["username"].is_null())
+                    if(answer["result"]["chat"]["username"] == "growbucket")
+                        continue;
 
                 sender_id = answer["result"][0]["message"]["from"]["id"];
 
@@ -28,7 +29,6 @@ int main(){
                 json peek_answer = gbot.peekUpdates(0);
                 if(!peek_answer["result"].size() || peek_answer["result"][0]["message"]["from"]["id"] != sender_id)
                     close_block = true;
-
 
 
 
