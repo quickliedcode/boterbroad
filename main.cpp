@@ -52,11 +52,16 @@ int main(){
                     }
                 }
                 else{
-                    gbot.forwardMessage("@growbucket", from_chat_id, message_id);
-                    if(close_block){
-                        gbot.sendMessage("@growbucket", "🏓 Переслал: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
-                        gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_block_message);
+                    try {
+                        gbot.forwardMessage("@growbucket", from_chat_id, message_id);
+                        if(close_block){
+                            gbot.sendMessage("@growbucket", "🏓 Переслал: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + " " + string(answer["result"][0]["message"]["from"]["last_name"]) + "</a>");
+                            gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_block_message);
+                        }
+                    } catch (...) {
+                        gbot.sendMessage("@growbucket", "Ошибка бота. JSON: " + answer);
                     }
+
                 }
 
 
