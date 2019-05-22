@@ -22,7 +22,7 @@ int main(){
                 sender_id = answer["result"][0]["message"]["from"]["id"];
 
                 bool close_block = false;
-                json peek_answer = gbot.peekUpdates(0);
+                json peek_answer = gbot.peekUpdates(2);
                 if(!peek_answer["result"].size() || peek_answer["result"][0]["message"]["from"]["id"] != sender_id)
                     close_block = true;
 
