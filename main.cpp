@@ -9,6 +9,7 @@
 
 
 static int sender_id;
+static int count_of_messages = 0;
 
 int main(){
     TelegramBot gbot(api_token);
@@ -24,7 +25,9 @@ int main(){
                 bool close_block = false;
                 json peek_answer = gbot.peekUpdates(2);
                 if(!peek_answer["result"].size() || peek_answer["result"][0]["message"]["from"]["id"] != sender_id)
-                    close_block = true;
+					close_block = true;
+				count_of_messages++;
+
 
 
 
@@ -71,7 +74,12 @@ int main(){
                             else{
                                 gbot.sendMessage("@growbucket", "🏓 Переслал: <a href='tg://user?id=" + to_string(int(answer["result"][0]["message"]["from"]["id"]))+ "'>" + string(answer["result"][0]["message"]["from"]["first_name"]) + "</a>");
                             }
-                            gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_block_message);
+							if(count_of_messages > 1)
+								gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_block_message);
+							else
+								gbot.sendMessage(int(answer["result"][0]["message"]["chat"]["id"]), accept_message);
+							count_of_messages = 0;
+
                         }
                     } catch (...) {
                         gbot.sendMessage("@growbucket", "Ошибка бота на ветке пересылки. JSON: " + answer.dump());
